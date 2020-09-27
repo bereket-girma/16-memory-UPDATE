@@ -1,16 +1,83 @@
-// Have a "new game" screen with a single choice "new game"
-// The game should have a total of 9 pairs (18 cards total)
-// When the user runs out of turns, show a losing screen
-// When the user finds a match, leave the cards face up and disallow clicking those cards
-// When the chooses two cards that do not match, flip them back over
-// When the user wins or loses, indicate as much
-// All screens should be generated via JavaScript templates
+// P E D A C
 
-// You have a bunch of cards arranged with their backs facing up. 
-// You flip two over. If they match, they remain face up. 
-// If they don't match, you flip them back over.
+// 
+// let divHtml = "aabbccddeeffgghhii"
+// .split("")
+//   .map((item) => `<div  id="${item}">${item}</div>`)
+//   .join("");
 
-function test() {
-    document.querySelector('.flip-card').style.transform = 'rotateY(180deg);'
+// document.querySelector("#cards").innerHTML = divHtml;
+
+
+// const cards = document.querySelectorAll('.card');
+
+// function flipCard() {
+//   this.classList.toggle('flip');
+// }
+
+// cards.forEach(card => card.addEventListener('click', flipCard));
+
+const cards = document.querySelectorAll(".memory-card");
+
+let hasFlippedCard = false;
+let lockBoard = false;
+let firstCard, secondCard;
+
+function flipCard() {
+  if (lockBoard) return;
+  if (this === firstCard) return;
+
+  this.classList.add("flip");
+
+  if (!hasFlippedCard) {
+    // first click
+    hasFlippedCard = true;
+    firstCard = this;
+
+    return;
   }
-  document.querySelector('.flip-card').addEventListener('click', test)
+
+  // second click
+  secondCard = this;
+
+  checkForMatch();
+}
+
+function checkForMatch() {
+  let isMatch = firstCard.dataset.framework === secondCard.dataset.framework;
+
+  isMatch ? disableCards() : unflipCards();
+  
+}
+
+function disableCards() {
+  firstCard.removeEventListener("click", flipCard);
+  secondCard.removeEventListener("click", flipCard);
+
+  resetBoard();
+}
+
+function unflipCards() {
+  lockBoard = true;
+
+  setTimeout(() => {
+    firstCard.classList.remove("flip");
+    secondCard.classList.remove("flip");
+
+    resetBoard();
+  }, 1500);
+}
+
+function resetBoard() {
+  [hasFlippedCard, lockBoard] = [false, false];
+  [firstCard, secondCard] = [null, null];
+}
+
+(function shuffle() {
+  cards.forEach((card) => {
+    let random = Math.floor(Math.random() * 18);
+    card.style.order = random;
+  });
+})();
+
+cards.forEach((card) => card.addEventListener("click", flipCard));
