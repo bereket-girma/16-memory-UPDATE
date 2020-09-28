@@ -1,13 +1,12 @@
 // P E D A C
 
-// 
+//
 // let divHtml = "aabbccddeeffgghhii"
 // .split("")
 //   .map((item) => `<div  id="${item}">${item}</div>`)
 //   .join("");
 
 // document.querySelector("#cards").innerHTML = divHtml;
-
 
 // const cards = document.querySelectorAll('.card');
 
@@ -47,6 +46,7 @@ function checkForMatch() {
   let isMatch = firstCard.dataset.framework === secondCard.dataset.framework;
 
   isMatch ? disableCards() : unflipCards();
+
   
 }
 
@@ -65,7 +65,7 @@ function unflipCards() {
     secondCard.classList.remove("flip");
 
     resetBoard();
-  }, 1500);
+  }, 1000);
 }
 
 function resetBoard() {
@@ -81,3 +81,4 @@ function resetBoard() {
 })();
 
 cards.forEach((card) => card.addEventListener("click", flipCard));
+

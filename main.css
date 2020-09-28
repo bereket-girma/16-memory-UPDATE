@@ -10,8 +10,10 @@ body {
   background: lightpink;
 }
 h2 {
+  font-family: Didot, serif;
+  font-size: 75px;
   position: absolute;
-  left: 600px;
+  left: 450px;
 }
 
 .memory-game {
