@@ -7,13 +7,17 @@
 body {
   height: 100vh;
   display: flex;
-  background: lightpink;
+  background: #27233A;
+  
+
+  
 }
 h2 {
   font-family: Didot, serif;
   font-size: 75px;
   position: absolute;
   left: 450px;
+  color: aliceblue;
 }
 
 .memory-game {
@@ -31,7 +35,7 @@ h2 {
   height: calc(33.333% - 10px);
   margin: 5px;
   position: relative;
-  transform: scale(1);
+  
   transform-style: preserve-3d;
   transition: transform 0.5s;
   /* */
@@ -53,7 +57,7 @@ h2 {
   padding: 20px;
   position: absolute;
   border-radius: 5px;
-  background: #c33c54;
+  background:#A099C2;
   backface-visibility: hidden;
 }
 
